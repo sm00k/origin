@@ -1,0 +1,6 @@
+﻿  temp.cpp
+D:\project\temp\temp\temp.cpp(16,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\project\temp\temp\temp.cpp(27,31): warning C4018: <: несоответствие типов со знаком и без знака
+D:\project\temp\temp\temp.cpp(49,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\project\temp\temp\temp.cpp(53,23): warning C4018: <: несоответствие типов со знаком и без знака
+  temp.vcxproj -> D:\project\temp\Debug\temp.exe
