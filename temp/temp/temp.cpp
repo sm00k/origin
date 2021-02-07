@@ -7,7 +7,7 @@ using namespace std;
 int main()
 {
     setlocale(LC_ALL, "Rus");
-    vector <int> v = { 2, 2, 2, 2, 3, 4, 6, 6, 8, 8, 8, 9, 10, 11, 12 };
+    vector <int> v = {1,1, 4, 5, 6 };
     vector <int> matches;
     vector <int> number;
     int counter = 0;
@@ -46,13 +46,23 @@ int main()
         }
         counter = 0;
     }
-    for (int y = 0; y < matches.size(); ++y)
+    if (matches.size() >= 1)
     {
-        cout << "кол-во повторений: " << matches[y] << '\n';
-    }
-    for (int n = 0; n < number.size(); ++n)
-    {
-        cout << "число: " << number[n] << '\n';
+        for (int y = 0; y < matches.size(); ++y)
+        {
+            v.push_back(matches[y]);
+        }
+        sort(v.begin(), v.end());
+        int max = v[v.size() - 1];
+        int second = 0;
+        for (; second < matches.size(); ++second)
+        {
+            if (max == matches[second])
+            {
+                cout << "мода ряда: " << number[second];
+                break;
+            }
+        }
     }
 
 

@@ -1,0 +1,3 @@
+﻿  Source.cpp
+D:\project\scope_borde\scope_borde\Source.cpp(28,20): warning C4018: <: несоответствие типов со знаком и без знака
+  scope_borde.vcxproj -> D:\project\scope_borde\Debug\scope_borde.exe
