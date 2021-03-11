@@ -9,6 +9,7 @@ CONFIG -= app_bundle
 
 SOURCES += \
         main.cpp \
+        print.cpp \
         quadratic_equation.cpp
 
 # Default rules for deployment.

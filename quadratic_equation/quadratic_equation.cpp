@@ -1,29 +1,29 @@
-﻿#include "quar.h"
-#include <math.h>
+﻿#include <math.h>
 #include <iostream>
 
-void quadratic_equation (double a, double b, double c)
+using namespace std;
+
+void quadratic_equation (double *pa, double *pb, double *pc)
 {
     const double four = 4;
     const double two = 2;
-    double one_res = 0;
-    double two_res = 0;
+
     double dis = 0;
-    dis = (b * b) - four * a * c;
+    dis = (*pb * *pb) - four * *pa * *pc;
 
     if (dis > 0)
     {
-      one_res = (-b + sqrt(dis)) / (two * a);
-      two_res = (-b - sqrt(dis)) / (two * a);
+      *pc = (-*pb + sqrt(dis)) / (two * *pa);
+      *pb = (-*pb - sqrt(dis)) / (two * *pa);
 
     }
     else if (dis == 0)
     {
-        one_res = (-b + sqrt(dis)) / (two * a);
+        *pc = (-*pb + sqrt(dis)) / (two * *pa);
     }
     else
     {
-
+        cout << "the equation has no roots\n";
     }
 
 }

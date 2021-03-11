@@ -15,6 +15,10 @@ int main ()
         cout << "enter number c: ";
         cin >> c;
 
+        quadratic_equation(&a, &b, &c);
+
+        print (c, b);
+
 
     }
 }
