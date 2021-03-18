@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <vector>
 #include "calculating.h"
 
@@ -8,7 +8,7 @@ int main ()
 {
     try
     {
-        vector <int> num;
+        vector <double> num;
         while (true)
          {
               enter_num(num);
@@ -17,5 +17,9 @@ int main ()
     catch (int)
     {
         cerr << "vector num range error\n";
+    }
+    catch (double)
+    {
+        cerr <<"the result is not an integer";
     }
 }

@@ -1,13 +1,13 @@
-#include <iostream>
+﻿#include <iostream>
 #include <vector>
 #include "calculating.h"
 
 using namespace std;
 
-void enter_num (vector <int> num)
+void enter_num (vector <double> num)
 {
 
-    int enter = 0;
+    double enter = 0;
     cout << "enter number: ";
     while (cin >> enter)
     {
