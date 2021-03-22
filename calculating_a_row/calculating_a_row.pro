@@ -10,7 +10,8 @@ CONFIG -= app_bundle
 SOURCES += \
         addition.cpp \
         enter_num.cpp \
-        main.cpp
+        main.cpp \
+        real_num.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
