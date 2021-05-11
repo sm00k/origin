@@ -12,15 +12,15 @@ int main ()
         cin >> ip;
         if (ip.length() < 7 || ip.length() > 15)
         {
-            cout << "1no\n";
+            cout << "length string very small or very big\n";
         }
         else if (ip[0] == '.' || ip[ip.length() -1] == '.')
         {
-            cout << "2no\n";
+            cout << "begin . or end .\n";
         }
         else
         {
-            cout << "passed to the function\n";
+            cout  << "1\tpassed to the function\n";
             verification_point(ip);
 
         }

@@ -12,7 +12,7 @@ void verification_point (string ip)
     {
           if ((ip[i] == '.') && (ip[i+1] == '.') && (i + 1 <= (int)ip.length()))
           {
-              cout << "no\n";
+              cout << "two point in one place\n";
               break;
           }
           else if (ip[i] != '.')
@@ -27,9 +27,9 @@ void verification_point (string ip)
               num.clear();
           }
     }
-    if (!error)
+    if (error)
     {
-        cout << "no\n";
+        cout << "one is problem in num_verification\n";
     }
     else
     {
