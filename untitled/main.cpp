@@ -1,29 +1,34 @@
-#include <iostream>
+﻿#include <iostream>
 #include <string>
-#include "check.h"
+#include <regex>
+
 using namespace std;
+
+void num (string ip)
+{
+    string num;
+    for (int i = 0; i < (int)ip.size(); ++i)
+    {
+        if (ip[i] != '.')
+        {
+            num;
+        }
+    }
+}
 
 int main ()
 {
-    while (true)
+    string ip = "2.1.2.2";
+    //cout << "please, enter ip adres: ";
+    //cin >> ip;
+    regex regular ("[\\d]{1,3}[.]{1}[\\d]{1,3}[.]{1}[\\d]{1,3}[.]{1}[\\d]{1,3}");
+    if (regex_match(ip.c_str(),regular))
     {
-        string ip;
-        cout << "please, enter ip adres: ";
-        cin >> ip;
-        if (ip.length() < 7 || ip.length() > 15)
-        {
-            cout << "length string very small or very big\n";
-        }
-        else if (ip[0] == '.' || ip[ip.length() -1] == '.')
-        {
-            cout << "begin . or end .\n";
-        }
-        else
-        {
-            cout  << "1\tpassed to the function\n";
-            verification_point(ip);
-
-        }
+        cout << "yes";
     }
-    return 0;
+    else
+    {
+        cout << "no";
+    }
+
 }
