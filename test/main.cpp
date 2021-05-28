@@ -5,25 +5,15 @@ using namespace std;
 
 int main ()
 {
-   string s, p;
-   cout << "enter s: ";
-   cin >> s;
-   cout << "enter p: ";
-   cin >> p;
+    while (true)
+    {
+       string s, p;
+       cout << "enter s: ";
+       cin >> s;
+       cout << "enter p: ";
+       cin >> p;
+       cout << s << " + " << p << " = " << stoi(s) + stoi(p) << '\n';
 
-   for (int i = 0; i < (int)s.size(); ++i)
-   {
-       if (s[i] > p[i])
-       {
+    }
 
-       }
-       else if (s[i] < p[i])
-       {
-
-       }
-       else
-       {
-
-       }
-   }
 }
