@@ -1,74 +1,57 @@
 ﻿#include <iostream>
 #include <string>
+#include <tuple>
 
 using namespace std;
 
-void verification_right (string one_right_half, string two_right_half)
+struct Conversion_value
 {
-    int num_one_right = stoi(one_right_half), num_two_right = stoi(two_right_half);
-    if (num_one_right > num_two_right)
-    {
-       cout << "More\n";
-    }
-    else if (num_one_right < num_two_right)
-    {
-       cout << "less\n";
-    }
-    else
-    {
-        cout << "equal\n";
-    }
+    int left_half = 0;
+    int right_half = 0;
+};
+
+void conversion_to_num (string left_half_num, string right_half_num, Conversion_value(&numbers_one))
+{
+    cout << "input conversion: " << left_half_num << '\t' << right_half_num << '\n';
+
+  numbers_one.left_half = stoi(left_half_num);
+  numbers_one.right_half = stoi(right_half_num);
+  cout << "conversion: " << numbers_one.left_half << '\t' << numbers_one.right_half << '\n';
 }
 
-void verification_left (string one_left_half, string two_left_half )
+void separation (string num, int dot_position, bool minus, Conversion_value(&numbers_one))
 {
-    int num_one = stoi(one_left_half), num_two = stoi(two_left_half);
-    if (num_one > num_two)
-    {
-        cout << "More\n";
-    }
-    else if (num_one < num_two)
-    {
-        cout << "less\n";
-    }
-    else
-    {
-        if (dot)
-        {
-           cout << "equal\n";
-        }
-        else
-        {
-            // переход в следующую функцию.
-        }
+  string left_half_num, right_half_num;
+  for (int i = 0; i < dot_position; ++i)
+  {
+      left_half_num += num[i];
+  }
+  if (dot_position == 0)
+  {
+      right_half_num = "0";
+      for (int i = 0; i < (int)num.size(); ++i)
+      {
+         left_half_num += num[i];
+      }
+  }
+  else
+  {
+      for (int i = dot_position + 1; i < (int)num.size(); ++i)
+      {
+          right_half_num += num[i];
+      }
+  }
+  if (minus)
+  {
+      right_half_num.insert(0, 1, '-');
+  }
+  cout << "separation: " << left_half_num << '\t' << right_half_num << '\n';
 
-    }
-}
-
-void separation (string num, string &left, string &right, bool dot)
-{
-    for (int i = 0;!dot && i < (int)num.size(); ++i)
-    {
-        if (num[i] != '.')
-        {
-           left += num[i];
-           num.erase(i,1);
-        }
-        else
-        {
-            dot = true;
-            num.erase(i,1);
-        }
-    }
-
-    if (dot)
-    {
-        right = num;
-    }
+  conversion_to_num(left_half_num, right_half_num, numbers_one);
 }
 
 
-void user_enter (string &num, string left, string right)
+void user_enter (string num, Conversion_value(&numbers_one))
 {
     cout << "enter number: ";
     cin >> num;
@@ -102,17 +85,66 @@ void user_enter (string &num, string left, string right)
       if (num[i] < '0' || num[i] > '9') ok = false;
     }
 
-    if ((int_end - int_start) + (num.length() - frac_start) == 0) ok = false;
+    if ((int_end - int_start) + (num.length() - frac_start) == 0)
+    {
+        ok = false;
+    }
 
-    ok ? separation(num, left, right, dot) : throw (-1);   //передача в следующую функцию
+    if (ok)
+    {
+        if (int_start == int_end)
+        {
+            num.insert(1, 1, '1');
+        }
+      separation(num, dot_position, minus, numbers_one);
+    }
+    else
+    {
+        throw (1);
+    }
+}
+
+void comparison (Conversion_value(numbers_one), Conversion_value(numbers_two))
+{
+    if (numbers_one.left_half > numbers_two.left_half)
+    {
+        cout << "more\n";
+        cout <<"comparison: " << numbers_one.left_half << '\t' << numbers_two.left_half <<'\n';
+    }
+    else if (numbers_one.left_half < numbers_two.left_half)
+    {
+        cout << "less\n";
+        cout <<"comparison: " << numbers_one.left_half << '\t' << numbers_two.left_half <<'\n';
+    }
+    else
+    {
+        if (numbers_one.right_half > numbers_two.right_half)
+        {
+            cout << "more\n";
+            cout << "two\n";
+        }
+        else if (numbers_one.right_half < numbers_two.right_half)
+        {
+            cout << "less\n";
+        }
+        else
+        {
+            cout << "equally\n";
+            cout <<"comparison: " << numbers_one.left_half << '\t' << numbers_two.left_half <<'\n';
+        }
+    }
 }
 
 int main ()
 {
     try
     {
-        string one_num,two_num, one_left_half, one_righ_half, two_left_half, two_right_half;
-        user_enter(one_num, one_left_half, one_righ_half);
+        Conversion_value numbers_one;
+        Conversion_value numbers_two;
+        string one_num, two_num;
+        user_enter(one_num, numbers_one);
+        user_enter(two_num, numbers_two);
+        comparison(numbers_one, numbers_two);
 
     }
     catch (int)

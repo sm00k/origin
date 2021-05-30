@@ -1,10 +1,11 @@
 ﻿#include <iostream>
-#include <string>
+#include <tuple>
 
 using namespace std;
 
 int main ()
 {
+<<<<<<< HEAD
     while (true)
     {
        string s, p;
@@ -16,4 +17,10 @@ int main ()
 
     }
 
+=======
+
+    string num = "-1234567890";
+    int a = stoi (num);
+    cout << a - 24;
+>>>>>>> 9eecdb9900b15163712c16424a2911c695b69928
 }
