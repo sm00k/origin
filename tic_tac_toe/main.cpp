@@ -1,47 +1,89 @@
-#include <iostream>
+﻿#include <iostream>
 #include <string>
 #include <regex>
+#include <exception>
 
 using namespace std;
 
 
-struct TIC_TAC
+struct repetitions_per_line
 {
-    int crosses, zeros, dots;
+    int crosses = 0, zeros = 0, dots = 0;
 };
 
-void row_analysis (string row, TIC_TAC(&first))
+void input_validation (string row)
 {
-    for (int i = 0; i < (int)row.size(); ++i)
+    const int max_line_size = 3;
+    regex regular ("[X,O,.]+");
+    if (!regex_match(row, regular))
     {
-        if (row[i] == 'X')
-        {
-           ++first.crosses;
-        }
-        else if (row[i] == 'O')
-        {
-            ++first.zeros;
-        }
-        else
-        {
-          ++first.dots;
-        }
+        throw "incorrect";
+    }
+    else if (row.size() != max_line_size)
+    {
+        throw "incorrect";
     }
 }
 
+void count_repet_in_a_line (string row, repetitions_per_line(&struct_row))
+{
+    for (int i = 0; i < (int)row.size(); ++i)
+    {
+       if (row[i] == 'X')
+       {
+           struct_row.crosses++;
+       }
+       else if (row[i] == 'O')
+       {
+           struct_row.zeros++;
+       }
+       else
+       {
+           struct_row.dots++;
+       }
+    }
+}
+
+void game_analysis (repetitions_per_line(first), repetitions_per_line(second), repetitions_per_line(thirst))
+{
+
+}
 
 int main ()
 {
-    TIC_TAC first, second, third;
-    const int row_length = 4;
-    string first_row, second_row, third_row;
-    regex regular ("[X,O,.]+");
-     cin >> first_row >> second_row >> third_row;
-    bool cheking_content = regex_match(first_row, regular) && regex_match(second_row, regular) &&
-            regex_match(third_row, regular);
+    try
+    {
+       string first_row = "X.O", second_row = "OOX", third_row = "XXO";
+       cout << "first row: ";
+       //cin >> first_row;
+       cout << "second row: ";
+       //cin >> second_row;
+       cout << "third row: \n";
+       //cin >> third_row;
 
-    bool cheking_length = first_row.size() < row_length && second_row.size() < row_length &&
-            third_row.size() < row_length;
+       input_validation(first_row);
+       input_validation(second_row); // проверка строк на соответствие требованиям
+       input_validation(third_row);
 
+       repetitions_per_line first_str;
+       repetitions_per_line second_str; // инициализация структур для каждой строки
+       repetitions_per_line third_str;
+
+       count_repet_in_a_line(first_row, first_str);
+       count_repet_in_a_line(second_row, second_str); // подсчет кол-во крестиков, ноликов и точек в строках
+       count_repet_in_a_line(third_row, third_str);
+
+       //cout << first_str.crosses << '\t' << first_str.zeros << '\t' << first_str.dots << '\n';
+      // cout << second_str.crosses << '\t' << second_str.zeros << '\t' << second_str.dots << '\n';
+      // cout << third_str.crosses << '\t' << third_str.zeros << '\t' << third_str.dots << '\n';
+    }
+    catch (const char *ex)
+    {
+        cout << ex <<'\n';
+    }
+    catch (...)
+    {
+        cout << "Something went wrong";
+    }
 
 }
