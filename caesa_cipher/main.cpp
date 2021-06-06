@@ -3,71 +3,147 @@
 
 using namespace std;
 
-string right_cription (string &str, int num)
+string encryption (string &str, int num)
 {
-    for (int i = 0; i < (int)str.length(); ++i)
-    {
-       if (str[i] < 'a' || str[i] > 'z')
-       {
-           continue;
-       }
-       else
-       {
-           if (str[i] + num > 'z')
-           {
-               str[i] = ((str[i] + num) - 122) + 96;
-           }
-           else
-           {
-               str[i] += num;
-           }
-       }
-    }
-    return str;
-}
-
-string left_cription (string &str, int num)
-{
-    for (int i = 0; i < (int)str.length(); ++i)
-    {
-        if (str[i] < 'a' || str[i] > 'z')
-        {
-            continue;
-        }
-        else
-        {
-            if (str[i] + num < 'a')
-            {
-                str[i] = 122 + (num + (str[i] - 96));
-            }
-            else
-            {
-                str[i] += num;
-            }
-        }
-    }
-    return str;
-}
-
-int main ()
-{
-    string str;
-    cout << "enter str: ";
-    getline(cin, str);
-    int num;
-    cout << "cription num: "; // максимум 26 символов!!! добавить контроль ввода!
-    cin >> num;
+    const char alphabet [26] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+    const int alphabet_size = 26;
+    bool stop = false;
     if (num > 0)
     {
-       cout << right_cription(str, num) << '\n';
-       num *= -1;
-       cout << left_cription(str,num);
+        if (num > alphabet_size)
+        {
+            num %= alphabet_size;
+        }
+       for (int i = 0; i < (int)str.size(); ++i)
+       {
+           stop = false;
+           for (int n = 0;!stop && n < alphabet_size; ++n)
+           {
+               if (str[i] == alphabet[n])
+               {
+                   if (n+num >= alphabet_size)
+                   {
+                       n = num - (alphabet_size - n);
+                       str[i] = alphabet[n];
+                       stop = true;
+                   }
+                   else
+                   {
+                       str[i] = alphabet[n+num];
+                       stop = true;
+                   }
+
+               }
+           }
+       }
     }
     else
     {
-       cout << left_cription(str, num) << '\n';
-       num *= -1;
-       cout << right_cription(str, num) << '\n';
+        if (num < -alphabet_size)
+        {
+           num %= -alphabet_size;
+        }
+
+        for (int i = 0; i < (int)str.size(); ++i)
+        {
+          stop = false;
+          for (int n = 0;!stop && n < alphabet_size; ++n)
+          {
+              if (str[i] == alphabet[n])
+              {
+                  if (n + num < 0)
+                  {
+                      str[i] = alphabet[alphabet_size + (n + num)];
+                      stop = true;
+                  }
+                  else
+                  {
+                      str[i] = alphabet[n+num];
+                      stop = true;
+                  }
+              }
+          }
+        }
     }
-    return 0;
+   return str;
+}
+
+string decryption (string &str, int num)
+{
+    const char alphabet [26] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+    const int alphabet_size = 26;
+    bool stop = false;
+    if (num > 0)
+    {
+        if (num > alphabet_size)
+        {
+            num %= alphabet_size;
+        }
+        num = -num;
+        for (int i = 0; i < (int)str.size(); ++i)
+        {
+          stop = false;
+          for (int n = 0;!stop && n < alphabet_size; ++n)
+          {
+              if (str[i] == alphabet[n])
+              {
+                  if (n + num < 0)
+                  {
+                      str[i] = alphabet[alphabet_size + (n + num)];
+                      stop = true;
+                  }
+                  else
+                  {
+                      str[i] = alphabet[n+num];
+                      stop = true;
+                  }
+              }
+          }
+        }
+    }
+    else
+    {
+        if (num < 0)
+        {
+            num %= -alphabet_size;
+        }
+        num = -num;
+        for (int i = 0; i < (int)str.size(); ++i)
+        {
+            stop = false;
+            for (int n = 0;!stop && n < alphabet_size; ++n)
+            {
+                if (str[i] == alphabet[n])
+                {
+                    if (n+num >= alphabet_size)
+                    {
+                        n = num - (alphabet_size - n);
+                        str[i] = alphabet[n];
+                        stop = true;
+                    }
+                    else
+                    {
+                        str[i] = alphabet[n+num];
+                        stop = true;
+                    }
+
+                }
+            }
+        }
+    }
+    return str;
+}
+
+
+int main ()
+{
+
+    string str;
+    cout << "enter your message: ";
+    getline(cin, str);
+    int num;
+    cout << "enter encoding number: ";
+    cin >> num;
+    cout <<  encryption(str, num) << '\n';
+    cout << decryption(str, num) <<'\n';
 }
